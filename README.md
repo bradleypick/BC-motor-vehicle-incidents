@@ -6,7 +6,16 @@ This project accesses data from the Government of British Columbia
 [catalogue](https://catalogue.data.gov.bc.ca/dataset).
 
 In particular we download and analyze 8 datasets that all involve fatalities
-or injuries sustained in a motor vehicle incident.
+or injuries sustained in a motor vehicle incident:
+
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-distraction-involvement
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-distraction-involvement
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-by-role
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-speeding-involvement
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-speeding-involvement
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-by-role
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement
+- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-alcohol-and-or-drug-involvement
 
 ### Question
 
