@@ -32,17 +32,17 @@ main <- function() {
   injury_drug <- read_csv("https://catalogue.data.gov.bc.ca/dataset/e87b3585-c195-4ee4-b531-a919262816ce/resource/28076ae1-0db2-48c3-a750-75498fe0357f/download/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement.csv")
   fatality_drug <- read_csv("https://catalogue.data.gov.bc.ca/dataset/459c4ded-4687-485e-aa10-f957fabefdd1/resource/b7d71c80-81d3-4c6f-a913-9d68f3c49d8e/download/motor-vehicle-fatalities-with-alcohol-and-or-drug-involvement.csv")
   
-  write_csv(injury_by_user, str_c(output_folder, "injury_by_user", sep = "/"))
-  write_csv(fatality_by_user, str_c(output_folder, "fatality_by_user",sep = "/"))
+  write_csv(injury_by_user, str_c(output_folder, "injury_by_user.csv", sep = "/"))
+  write_csv(fatality_by_user, str_c(output_folder, "fatality_by_user.csv",sep = "/"))
   
-  write_csv(injury_distract, str_c(output_folder, "injury_distract", sep = "/"))
-  write_csv(fatality_distract, str_c(output_folder, "fatality_distract",sep = "/"))
+  write_csv(injury_distract, str_c(output_folder, "injury_distract.csv", sep = "/"))
+  write_csv(fatality_distract, str_c(output_folder, "fatality_distract.csv",sep = "/"))
   
-  write_csv(injury_speed, str_c(output_folder, "injury_speed", sep = "/"))
-  write_csv(fatality_speed, str_c(output_folder, "fatality_speed",sep = "/"))
+  write_csv(injury_speed, str_c(output_folder, "injury_speed.csv", sep = "/"))
+  write_csv(fatality_speed, str_c(output_folder, "fatality_speed.csv",sep = "/"))
   
-  write_csv(injury_drug, str_c(output_folder, "injury_drug", sep = "/"))
-  write_csv(fatality_drug, str_c(output_folder, "fatality_drug",sep = "/"))
+  write_csv(injury_drug, str_c(output_folder, "injury_drug.csv", sep = "/"))
+  write_csv(fatality_drug, str_c(output_folder, "fatality_drug.csv",sep = "/"))
   
 }
 
