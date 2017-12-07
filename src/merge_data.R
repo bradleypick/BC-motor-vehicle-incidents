@@ -11,7 +11,9 @@
 # Usage Rscript merge_data.R /by_user.csv /distract.csv /speed.csv /drug.csv /output.csv
 # Depends on `tidyverse` being installed
 
-library(tidyverse)
+library(readr)
+library(tidyr)
+library(dplyr)
 
 # define arguments
 args <- commandArgs(trailingOnly = TRUE)
