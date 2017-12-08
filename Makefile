@@ -5,7 +5,7 @@
 # Usage: make all
 #		(from the root directory of project)
 
-all: results/data/fatality.csv results/data/injury.csv results/img/fatal-speed-plot.png results/img/fatal-distract-plot.png results/img/fatal-drug-plot.png results/img/injury-speed-plot.png results/img/injury-distract-plot.png results/img/injury-drug-plot.png
+all: results/motor_vehicle_incident_analysis.md results/data/fatality.csv results/data/injury.csv results/img/fatal-speed-plot.png results/img/fatal-distract-plot.png results/img/fatal-drug-plot.png results/img/injury-speed-plot.png results/img/injury-distract-plot.png results/img/injury-drug-plot.png
 
 ## rules to download raw data
 data/fatality_by_user.csv:
@@ -63,9 +63,13 @@ results/img/injury-drug-plot.png: src/plot_data.R results/data/injury.csv
 results/img/injury-distract-plot.png: src/plot_data.R results/data/injury.csv
 	Rscript src/plot_data.R results/data/injury.csv ./results/img
 
+results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/injury-speed-plot.png results/img/injury-distract-plot.png results/img/injury-drug-plot.png results/img/fatal-speed-plot.png results/img/fatal-distract-plot.png results/img/fatal-drug-plot.png
+	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
+
 
 clean:
 	rm -f results/*.csv
 	rm -f results/data/*.csv
 	rm -f results/img/*.png
 	rm -f data/*.csv
+	rm -f results/motor_vehicle_incident_analysis*
