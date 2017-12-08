@@ -5,7 +5,7 @@
 # Usage: make all
 #		(from the root directory of project)
 
-all: results/fatality.csv results/injury.csv
+all: results/data/fatality.csv results/data/injury.csv results/img/fatal-speed-plot.png results/img/fatal-distract-plot.png results/img/fatal-drug-plot.png results/img/injury-speed-plot.png results/img/injury-distract-plot.png results/img/injury-drug-plot.png
 
 ## rules to download raw data
 data/fatality_by_user.csv:
@@ -34,14 +34,38 @@ data/injury_drug.csv:
 
 
 # merge and write fatality data into data folder
-results/fatality.csv: src/merge_data.R data/fatality_by_user.csv data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv
-	Rscript src/merge_data.R data/fatality_by_user.csv data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv results/fatality.csv
+results/data/fatality.csv: src/merge_data.R data/fatality_by_user.csv data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv
+	Rscript src/merge_data.R data/fatality_by_user.csv data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv results/data/fatality.csv
 
 # merge and write injury data into data folder
-results/injury.csv: src/merge_data.R data/injury_by_user.csv data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv
-	Rscript src/merge_data.R data/injury_by_user.csv data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv results/injury.csv
+results/data/injury.csv: src/merge_data.R data/injury_by_user.csv data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv
+	Rscript src/merge_data.R data/injury_by_user.csv data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv results/data/injury.csv
+
+
+# plot the fatality data
+results/img/fatal-speed-plot.png: src/plot_data.R results/data/fatality.csv
+	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+
+results/img/fatal-drug-plot.png: src/plot_data.R results/data/fatality.csv
+	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+
+results/img/fatal-distract-plot.png: src/plot_data.R results/data/fatality.csv
+	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+
+
+# plot the injury data
+results/img/injury-speed-plot.png: src/plot_data.R results/data/injury.csv
+	Rscript src/plot_data.R results/data/injury.csv ./results/img
+
+results/img/injury-drug-plot.png: src/plot_data.R results/data/injury.csv
+	Rscript src/plot_data.R results/data/injury.csv ./results/img
+
+results/img/injury-distract-plot.png: src/plot_data.R results/data/injury.csv
+	Rscript src/plot_data.R results/data/injury.csv ./results/img
 
 
 clean:
 	rm -f results/*.csv
+	rm -f results/data/*.csv
+	rm -f results/img/*.png
 	rm -f data/*.csv
