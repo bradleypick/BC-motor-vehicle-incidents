@@ -53,14 +53,16 @@ main <- function() {
   colnames(by_user) <- make.names(names(by_user))
 
   # retain only rows with affirmative cases
-  distract <- distract %>% filter(distracted == 'Y') %>% select(year, distracted_count)
-  speed <- speed %>% filter(speeding == 'Y') %>% select(year, speeding_count)
-  drug <- drug %>% filter(drug == 'Y') %>% select(year, drug_count)
+  #distract <- distract %>% filter(distracted == 'Y') %>% select(year, distracted_count)
+  #speed <- speed %>% filter(speeding == 'Y') %>% select(year, speeding_count)
+  #drug <- drug %>% filter(drug == 'Y') %>% select(year, drug_count)
   
   # drop earlier years 
   by_user <- by_user %>% filter(year %in% unique(distract$year))
   drug <- drug %>% filter(year %in% unique(distract$year))
   speed <- speed %>% filter(year %in% unique(distract$year))
+  
+  #final_product <- bind_cols(distract, drug, speed)
   
   # join all preprocessed individual datasets into one
   final_product <- by_user %>% 
