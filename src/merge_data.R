@@ -72,8 +72,9 @@ main <- function() {
   
   # write aggregated dataset to location specified
   write_csv(final_product, output_file)
-
+  
 }
 
 # call main function
 main()
+

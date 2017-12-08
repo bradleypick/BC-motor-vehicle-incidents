@@ -101,6 +101,8 @@ main <- function() {
          device = "png",
          path = out_folder)
   dev.off()
+  
 }
 
 main()
+
