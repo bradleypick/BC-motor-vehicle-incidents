@@ -1,5 +1,27 @@
 # BC Motor Vehicle Incident Analysis
 
+### Usage
+
+From the root folder of project directory:
+```
+make all
+```
+If you wish to clean up after yourself:
+```
+make clean
+```
+
+### Dependencies
+
+Every effort has been made to use `packrat` to manage dependencies. As far
+as I can tell, this means you should only need to have packrat installed. Until
+we learn more about package management I have also included a very rough outline
+of necessary dependencies at the end of the readme.  
+
+If you'd rather not use packrat, the packages that are loaded or used in the
+scripts and Makefile explicitly are:
+`readr`, `tidyr`, `stringr`, `dplyr`, `ggplot2`, and `ezknitr`.
+
 ### Identify Dataset
 
 This project accesses data from the Government of British Columbia
