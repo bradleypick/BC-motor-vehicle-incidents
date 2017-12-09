@@ -14,9 +14,9 @@ library(knitr)
 library(readr)
 library(dplyr)
 
-speed <- read_csv('../results/data/speed.csv')
-drug <- read_csv('../results/data/drug.csv')
-distract <- read_csv('../results/data/distract.csv')
+speed <- read_csv('./results/data/speed.csv')
+drug <- read_csv('./results/data/drug.csv')
+distract <- read_csv('./results/data/distract.csv')
 
 summary_table <- function(data) {
   out <- data %>% 

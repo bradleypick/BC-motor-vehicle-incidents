@@ -163,15 +163,6 @@ hr {
 </head>
 
 <body>
-<pre><code>## Error: &#39;../results/data/speed.csv&#39; does not exist in current working directory (&#39;/home/bradley/mds/522/BC-motor-vehicle-incidents&#39;).
-</code></pre>
-
-<pre><code>## Error: &#39;../results/data/drug.csv&#39; does not exist in current working directory (&#39;/home/bradley/mds/522/BC-motor-vehicle-incidents&#39;).
-</code></pre>
-
-<pre><code>## Error: &#39;../results/data/distract.csv&#39; does not exist in current working directory (&#39;/home/bradley/mds/522/BC-motor-vehicle-incidents&#39;).
-</code></pre>
-
 <h2>Introduction</h2>
 
 <p>On any given week there are frequent news stories discussing the impact that distracted driving has on road safety. In particular, many of these stories focus on the advent of smartphones and texting while driving. We hope to identify general trends in the number of fatalities and injuries that occur on British Columbia&#39;s roads. Furthermore, we seek to relate trends in the overall number of fatalities and injuries to the number of cases that involve drugs/alcohol, speed, or distraction.</p>
@@ -180,20 +171,17 @@ hr {
 
 <p>It may not seem so, but the number of fatalities and injuries on British Columbia&#39;s roads decreased between 2004 and 2015:</p>
 
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;speed&#39; not found
-</code></pre>
-
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;speed&#39; not found
-</code></pre>
-
-<pre><code>## Error in eval_bare(dot$expr, dot$env): object &#39;total_in&#39; not found
-</code></pre>
-
-<pre><code>## Error in colnames(total_out) &lt;- c(&quot;Total Change in Injuries&quot;, &quot;Total Change in Fatalities&quot;): object &#39;total_out&#39; not found
-</code></pre>
-
-<pre><code>## Error in inherits(x, &quot;list&quot;): object &#39;total_out&#39; not found
-</code></pre>
+<table><thead>
+<tr>
+<th align="right">Total Change in Injuries</th>
+<th align="right">Total Change in Fatalities</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">-353</td>
+<td align="right">-147</td>
+</tr>
+</tbody></table>
 
 <h4>Speed</h4>
 
@@ -204,14 +192,17 @@ It is beyond the scope of our analysis to investigate the reasons for the decrea
 
 <p>If we wish to be precise, the number of fatalities resulting from crashes that involved speeding dropped by 58 between 2004 and 2015 (similarly, injuries involving speeding dropped by 288).</p>
 
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;speed&#39; not found
-</code></pre>
-
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;speed_out&#39; not found
-</code></pre>
-
-<pre><code>## Error in kable(speed_out, caption = &quot;2004-2015&quot;): object &#39;speed_out&#39; not found
-</code></pre>
+<table><thead>
+<tr>
+<th align="right">Change in Speeding Involved Injuries</th>
+<th align="right">Change in Speeding Involved Fatalities</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">-288</td>
+<td align="right">-58</td>
+</tr>
+</tbody></table>
 
 <h4>Drugs and Alcohol</h4>
 
@@ -221,14 +212,17 @@ It is beyond the scope of our analysis to investigate the reasons for the decrea
 
 <p>Like speeding involved incidents, there as been much emphasis placed on keeping drivers from participating in this type of dangerous behaviour over that last few decades. The exact numbers show that the dropin fatalities and injuries has been of a similar magnitude to speeding involved incidents. The number of fatalities involving drugs dropped by 56 and the number of injuries involving drugs dropped by 186.</p>
 
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;drug&#39; not found
-</code></pre>
-
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;drug_out&#39; not found
-</code></pre>
-
-<pre><code>## Error in kable(drug_out, caption = &quot;2004-2015&quot;): object &#39;drug_out&#39; not found
-</code></pre>
+<table><thead>
+<tr>
+<th align="right">Change in Drug Involved Injuries</th>
+<th align="right">Change in Drug Involved Fatalities</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">-186</td>
+<td align="right">-56</td>
+</tr>
+</tbody></table>
 
 <h4>Distraction</h4>
 
@@ -238,14 +232,17 @@ It is beyond the scope of our analysis to investigate the reasons for the decrea
 
 <p>In fact, we are seeing a small trend in the opposite direction. The number of distraction involved injuries and fatalities has increased from 2004-2015. This confirms our suspicions that distracted driving was not following the same declining trend as other factors in motor vehicle incidents. The number of fatalities where distraction was a factor increases by 12 between 2004 and 2015. Similarly, the number of injuries where distraction was a factor increased by 5.</p>
 
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;distract&#39; not found
-</code></pre>
-
-<pre><code>## Error in eval(lhs, parent, parent): object &#39;distract_out&#39; not found
-</code></pre>
-
-<pre><code>## Error in kable(distract_out, caption = &quot;2004-2015&quot;): object &#39;distract_out&#39; not found
-</code></pre>
+<table><thead>
+<tr>
+<th align="right">Change in Distraction Involved Injuries</th>
+<th align="right">Change in Distraction Involved Fatalities</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">5</td>
+<td align="right">12</td>
+</tr>
+</tbody></table>
 
 <h3>Conclusion</h3>
 
