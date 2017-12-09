@@ -65,7 +65,7 @@ main <- function() {
   ggsave(filename = output_file, 
          plot = out_plot, 
          device = "png",
-         width = 6, height = 4,
+         width = 7, height = 3.5,
          dpi = 100)
   dev.off()
   
