@@ -8,10 +8,9 @@ output: github_document
 
 
 
-![Fatalities Involving Distraction](../results/img/fatal-distract-plot.png)
-![Fatalities Involving Drugs or Alcohol](../results/img/fatal-drug-plot.png)
-![Fatalities Involving Speed](../results/img/fatal-speed-plot.png)
+![Fatalities Involving Distraction](../results/img/distract-plot.png)
+![Fatalities Involving Drugs or Alcohol](../results/img/speed-plot.png)
+![Fatalities Involving Speed](../results/img/drug-plot.png)
 
-![Injuries Involving Distraction](../results/img/injury-distract-plot.png)
-![Injuries Involving Drugs or Alcohol](../results/img/injury-drug-plot.png)
-![Injuries Involving Speed](../results/img/injury-speed-plot.png)
+
+
