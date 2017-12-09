@@ -15,16 +15,35 @@ The `Makefile` dependency graph looks like this:
 
 ![](./Makefile.png)
 
+If for some reason you need the explicit terminal commands, they are listed at the end of the README.
+
 ### Dependencies
 
-Every effort has been made to use `packrat` to manage dependencies. As far
+The project was developed using
+
+```
+R version 3.4.2
+Rstudio version 1.1.383
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.3 LTS
+GNU Make 3.81
+```
+
+Every effort has been made to use `packrat` to manage package ependencies. As far
 as I can tell, this means you should only need to have packrat installed. Until
 we learn more about package management I have also included a very rough outline
 of necessary dependencies at the end of the readme.  
 
 If you'd rather not use packrat, the packages that are loaded or used in the
 scripts and Makefile explicitly are:
-`readr`, `tidyr`, `stringr`, `dplyr`, `ggplot2`, and `ezknitr`.
+- `readr` v 1.1.1
+- `tidyr` v 0.7.2
+- `stringr` v 1.2.0
+- `dplyr` v 0.7.4
+- `ggplot2` v 2.2.1
+- `cowplot` v 0.9.1
+- `ezknitr` v 0.6
+- `packrat` v 0.4.8-1
 
 ### Identify Dataset
 
@@ -32,16 +51,7 @@ This project accesses data from the Government of British Columbia
 [catalogue](https://catalogue.data.gov.bc.ca/dataset).
 
 In particular we download and analyze 8 datasets that all involve fatalities
-or injuries sustained in a motor vehicle incident:
-
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-distraction-involvement
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-distraction-involvement
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-by-role
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-speeding-involvement
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-speeding-involvement
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-by-role
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement
-- https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-alcohol-and-or-drug-involvement
+or injuries sustained in a motor vehicle incident. These datasets include information on [injuries](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-distraction-involvement) and [fatalities](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-distraction-involvement) where distraction was involved, [injuries](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-speeding-involvement) and [fatalities](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-speeding-involvement) where speeding was involved, as well as [injuries](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement) and [fatalities](https://catalogue.data.gov.bc.ca/dataset/motor-vehicle-fatalities-with-alcohol-and-or-drug-involvement) where drugs or alcohol were involved.
 
 ### Question
 
@@ -67,112 +77,62 @@ distracted driving.
 We investigate this using data on fatalities/injuries involving
 drugs and alcohol, speeding, and distracted driving.
 
-### Plan of action
+### Results
 
-We will plot the overall number of injuries and fatalities against time for
-previous decade.
+Insert results here as final report summary.
 
-We will plot the aggregated data from the last ten years in such a way as
-to illustrate which causes have become more frequent and which have become
-less frequent.
 
-### Dependencies
+#### Explicit Terminal Commands
 
-This project is being constructed using Rstudio (version `1.1.383`):
+The terminal commands that are executed in the Makefile are as follows.
 
-Identified using `sessionInfo()` in `download_data.R`:
+The following six commands download the raw data:
 
 ```
-R version 3.4.2 (2017-09-28)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 14.04.3 LTS
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/bf653fa6-4651-416b-8991-045fb8a3da49/resource/18d1772b-3596-490b-9079-7ef4f565a8c3/download/motor-vehicle-fatalities-with-distraction-involvement.csv" ./data/fatality_distract.csv
 
-Matrix products: default
-BLAS: /usr/lib/libblas/libblas.so.3.0
-LAPACK: /usr/lib/lapack/liblapack.so.3.0
 
-locale:
- [1] LC_CTYPE=en_CA.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_CA.UTF-8        LC_COLLATE=en_CA.UTF-8    
- [5] LC_MONETARY=en_CA.UTF-8    LC_MESSAGES=en_CA.UTF-8   
- [7] LC_PAPER=en_CA.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_CA.UTF-8 LC_IDENTIFICATION=C       
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/23937c1c-f1e0-497c-a34f-c2c6ce15e775/resource/de1b175c-2725-403a-ba33-6b57f868f38e/download/motor-vehicle-fatalities-with-speeding-involvement.csv" ./data/fatality_speed.csv
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  base     
 
-other attached packages:
-[1] readr_1.1.1
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/459c4ded-4687-485e-aa10-f957fabefdd1/resource/b7d71c80-81d3-4c6f-a913-9d68f3c49d8e/download/motor-vehicle-fatalities-with-alcohol-and-or-drug-involvement.csv" ./data/fatality_drug.csv
 
-loaded via a namespace (and not attached):
-[1] compiler_3.4.2 R6_2.2.2       hms_0.3        tools_3.4.2    curl_3.0      
-[6] tibble_1.3.4   Rcpp_0.12.13   methods_3.4.2  rlang_0.1.4
+
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/91d4f3e3-3c16-4f22-bb09-aafd0350659f/resource/00039030-21fb-4441-986c-03cb35d2f852/download/motor-vehicle-serious-injuries-with-distraction-involvement.csv" ./data/injury_distract.csv
+
+
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/eb4e998f-3d1b-4257-a591-91e863344f0d/resource/9036364a-bce3-4d11-8ff2-a640ff533df6/download/motor-vehicle-serious-injuries-with-speeding-involvement.csv" ./data/injury_speed.csv
+
+
+Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/e87b3585-c195-4ee4-b531-a919262816ce/resource/28076ae1-0db2-48c3-a750-75498fe0357f/download/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement.csv" ./data/injury_drug.csv
 ```
 
-Using `sessionInfo()` in `merge_data.R`:
+The following three commands each merge two datasets based on causal factor of the incidents:
 
 ```
-R version 3.4.2 (2017-09-28)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 14.04.3 LTS
+Rscript src/merge_data.R data/injury_distract.csv data/fatality_distract.csv ./results/data/distract.csv
 
-Matrix products: default
-BLAS: /usr/lib/libblas/libblas.so.3.0
-LAPACK: /usr/lib/lapack/liblapack.so.3.0
 
-locale:
- [1] LC_CTYPE=en_CA.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_CA.UTF-8        LC_COLLATE=en_CA.UTF-8    
- [5] LC_MONETARY=en_CA.UTF-8    LC_MESSAGES=en_CA.UTF-8   
- [7] LC_PAPER=en_CA.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_CA.UTF-8 LC_IDENTIFICATION=C       
+Rscript src/merge_data.R data/injury_speed.csv data/fatality_speed.csv ./results/data/speed.csv
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  base     
 
-other attached packages:
-[1] bindrcpp_0.2 dplyr_0.7.4  tidyr_0.7.2  readr_1.1.1
-
-loaded via a namespace (and not attached):
- [1] Rcpp_0.12.13     assertthat_0.2.0 R6_2.2.2         magrittr_1.5    
- [5] rlang_0.1.4      tools_3.4.2      glue_1.2.0       purrr_0.2.4     
- [9] hms_0.3          compiler_3.4.2   pkgconfig_2.0.1  bindr_0.1       
-[13] tidyselect_0.2.2 methods_3.4.2    tibble_1.3.4    
-
+Rscript src/merge_data.R data/injury_drug.csv data/fatality_drug.csv ./results/data/drug.csv
 ```
 
-Using `sessionInfo()` in `plot_data.R`:
+The following three commands each take a merged dataset and produce a plot to be used in the report:
 
 ```
-R version 3.4.2 (2017-09-28)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 14.04.3 LTS
+Rscript src/plot_data.R results/data/distract.csv ./results/img/distract-plot.png
 
-Matrix products: default
-BLAS: /usr/lib/libblas/libblas.so.3.0
-LAPACK: /usr/lib/lapack/liblapack.so.3.0
 
-locale:
- [1] LC_CTYPE=en_CA.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_CA.UTF-8        LC_COLLATE=en_CA.UTF-8    
- [5] LC_MONETARY=en_CA.UTF-8    LC_MESSAGES=en_CA.UTF-8   
- [7] LC_PAPER=en_CA.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_CA.UTF-8 LC_IDENTIFICATION=C       
+Rscript src/plot_data.R results/data/speed.csv ./results/img/speed-plot.png
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  base     
 
-other attached packages:
-[1] bindrcpp_0.2  stringr_1.2.0 ggplot2_2.2.1 dplyr_0.7.4   readr_1.1.1  
+Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
+```
 
-loaded via a namespace (and not attached):
- [1] Rcpp_0.12.13     digest_0.6.12    assertthat_0.2.0 plyr_1.8.4      
- [5] grid_3.4.2       R6_2.2.2         gtable_0.2.0     magrittr_1.5    
- [9] scales_0.5.0     stringi_1.1.5    rlang_0.1.4      lazyeval_0.2.1  
-[13] labeling_0.3     tools_3.4.2      glue_1.2.0       munsell_0.4.3   
-[17] hms_0.3          compiler_3.4.2   colorspace_1.3-2 pkgconfig_2.0.1
-[21] bindr_0.1        methods_3.4.2    tibble_1.3.4
+The following command renders the final report:
+
+```
+Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
 ```
