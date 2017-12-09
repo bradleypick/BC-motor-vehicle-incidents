@@ -7,104 +7,65 @@
 # This script reads in the merged datasets
 # summarises and plots the data in an instructuve way.
 # 
-# Usage: Rscript plot_data.R input_file.csv output_folder
+# Usage: Rscript plot_data.R input_file.csv output_file
 # 
-# Depends on readr, ggplot2, and dplyr.
+# Depends on readr, ggplot2, cowplot, stringr, and dplyr.
 
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(cowplot)
 library(stringr)
+theme_set(theme_bw())
 
 
 # define arguments
 args <- commandArgs(trailingOnly = TRUE)
 input_file <- args[1]
-out_folder <- args[2]
+output_file <- args[2]
 
 main <- function() {
   
-  ## check which dataset is being read in
-  fatal_not_injury <- str_detect(input_file, "fatality")
-  
-  if (fatal_not_injury) {
-    title <- "Fatalities"
-    axis <- "fatalities"
-    file <- "fatal"
-  } else {
-    title <- "Injuries"
-    axis <- "injuries"
-    file <- "injury"
-  }
+  ## extract the incident type for plotting annotation
+  input_type <- str_extract(input_file, pattern = "(?<=data/)(.*)(?=\\.)")
   
   ## read in the dataset from source provided
   data <- read_csv(input_file)
   
   ## plot the incidents and the factors involved
-  speed_plot <- data %>% 
-    filter(distracted == 'N', drug == 'N') %>% 
+  fatal_plot <- data %>% 
+    filter(injury_cause == 'N') %>% 
     ggplot(aes(x=year)) +
-    geom_col(aes(y=speeding_count, fill=speeding)) +
-    scale_fill_manual("Speeding\n Involved", 
+    geom_col(aes(y=fatality_count, fill=fatality_cause)) +
+    scale_fill_manual(str_c("Involved\n", input_type), 
                       labels = c("No","Yes"), 
                       values = c("wheat4","sienna2")) +
     scale_x_continuous("Year",
                        breaks = 2004:2015) +
-    scale_y_continuous(str_c("Number of ", axis)) +
+    scale_y_continuous("Number of Fatalities") +
     theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, "\nby speed involvement"))
+    ggtitle(str_c("Number of Fatalities \nby ", input_type, " involvement"))
   
-  distract_plot <- data %>% 
-    filter(speeding == 'N', drug == 'N') %>% 
+  injury_plot <- data %>% 
+    filter(fatality_cause == 'N') %>% 
     ggplot(aes(x=year)) +
-    geom_col(aes(y=distracted_count, fill=distracted)) +
-    scale_fill_manual("Distraction\n Involved", 
+    geom_col(aes(y=injury_count, fill=injury_cause)) +
+    scale_fill_manual(str_c("Involved\n", input_type), 
                       labels = c("No","Yes"), 
                       values = c("wheat4","sienna2")) +
     scale_x_continuous("Year",
                        breaks = 2004:2015) +
-    scale_y_continuous(str_c("Number of ", axis)) +
+    scale_y_continuous("Number of Injuries") +
     theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, "\nby distraction involvement"))
+    ggtitle(str_c("Number of Injuries \nby ", input_type, " involvement"))
   
-  drug_plot <- data %>% 
-    filter(speeding == 'N', distracted == 'N') %>% 
-    ggplot(aes(x=year)) +
-    geom_col(aes(y=drug_count, fill=drug)) +
-    scale_fill_manual("Drugs or \n Alcohol\n Involved", 
-                      labels = c("No","Yes"), 
-                      values = c("wheat4","sienna2")) +
-    scale_x_continuous("Year",
-                       breaks = 2004:2015) +
-    scale_y_continuous(str_c("Number of ", axis)) +
-    theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, "\nby drug/alcohol involvement"))
+  out_plot <- plot_grid(injury_plot, fatal_plot, nrow = 1)
   
-  png(str_c(out_folder, "/", file, "-speed-plot.png"))
-  speed_plot
-  ggsave(filename = str_c(file, "-speed-plot.png"), 
-         plot = speed_plot, 
+  png(output_file)
+  ggsave(filename = output_file, 
+         plot = out_plot, 
          device = "png",
-         path = out_folder,
-         scale = 0.5,
-         dpi = 100)
-  dev.off()
-  png(str_c(out_folder, "/", file, "-distract-plot.png"))
-  distract_plot
-  ggsave(filename = str_c(file, "-distract-plot.png"), 
-         plot = distract_plot, 
-         device = "png",
-         path = out_folder,
-         scale = 0.5,
-         dpi = 100)
-  dev.off()
-  png(str_c(out_folder, "/", file, "-drug-plot.png"))
-  drug_plot
-  ggsave(filename = str_c(file, "-drug-plot.png"), 
-         plot = drug_plot, 
-         device = "png",
-         path = out_folder,
-         scale = 0.5,
+         width = 6, height = 4,
          dpi = 100)
   dev.off()
   
