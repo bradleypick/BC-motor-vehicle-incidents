@@ -29,13 +29,10 @@ Running under: Ubuntu 14.04.3 LTS
 GNU Make 3.81
 ```
 
-Every effort has been made to use `packrat` to manage package ependencies. As far
+Every effort has been made to use `packrat` to manage package dependencies. As far
 as I can tell, this means you should only need to have packrat installed. Until
-we learn more about package management I have also included a very rough outline
-of necessary dependencies at the end of the readme.  
+we learn more about package management I have also included a list of packages explicitly loaded during the analysis and the versions used (as identified by `sessionInfo()`):
 
-If you'd rather not use packrat, the packages that are loaded or used in the
-scripts and Makefile explicitly are:
 - `readr` v 1.1.1
 - `tidyr` v 0.7.2
 - `stringr` v 1.2.0
@@ -44,6 +41,7 @@ scripts and Makefile explicitly are:
 - `cowplot` v 0.9.1
 - `ezknitr` v 0.6
 - `packrat` v 0.4.8-1
+- `knitr` v 1.17
 
 ### Identify Dataset
 
@@ -79,14 +77,19 @@ drugs and alcohol, speeding, and distracted driving.
 
 ### Results
 
-Insert results here as final report summary.
+The results confirm both of our hypotheses. Both the total number of injuries and fatalities sustained in motor vehicle incidents in British Columbia dropped between 2004 and 2015.
+
+Furthermore, we found that both speeding and drugs/alcohol have become less frequently occuring factors in these incidents (as measured by sheer numbers).
+
+Finally, we found that the number of injuries and fatalities where distraction was involved actually *increased* between 2004 and 2014.
 
 
 #### Explicit Terminal Commands
 
 The terminal commands that are executed in the Makefile are as follows.
 
-The following six commands download the raw data:
+The `src/download_data.R` file takes a url and file location and downloads the file and writes it to the provided location.
+The following six commands download the raw data used in the analysis:
 
 ```
 Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/bf653fa6-4651-416b-8991-045fb8a3da49/resource/18d1772b-3596-490b-9079-7ef4f565a8c3/download/motor-vehicle-fatalities-with-distraction-involvement.csv" ./data/fatality_distract.csv
@@ -106,7 +109,7 @@ Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/eb4e998f-3
 
 Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/e87b3585-c195-4ee4-b531-a919262816ce/resource/28076ae1-0db2-48c3-a750-75498fe0357f/download/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement.csv" ./data/injury_drug.csv
 ```
-
+The `src/merge_data.R` script takes two datasets that share a factor of interest and merges the dataframe. It also writes the combined file to the location provided by the user.
 The following three commands each merge two datasets based on causal factor of the incidents:
 
 ```
@@ -118,7 +121,7 @@ Rscript src/merge_data.R data/injury_speed.csv data/fatality_speed.csv ./results
 
 Rscript src/merge_data.R data/injury_drug.csv data/fatality_drug.csv ./results/data/drug.csv
 ```
-
+The `src/plot_data.R` file takes a dataset and produces a figure which is saved to the locaton provided.
 The following three commands each take a merged dataset and produce a plot to be used in the report:
 
 ```
@@ -131,7 +134,7 @@ Rscript src/plot_data.R results/data/speed.csv ./results/img/speed-plot.png
 Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
 ```
 
-The following command renders the final report:
+The following command renders the final report whose raw outline lives in the `src/motor_vehicle_incident_analysis.Rmd` file:
 
 ```
 Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
