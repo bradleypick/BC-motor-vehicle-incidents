@@ -11,6 +11,10 @@ If you wish to clean up after yourself:
 make clean
 ```
 
+The `Makefile` dependency graph looks like this:
+
+![](./Makefile.png)
+
 ### Dependencies
 
 Every effort has been made to use `packrat` to manage dependencies. As far
