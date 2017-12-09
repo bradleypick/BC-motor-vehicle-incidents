@@ -52,7 +52,7 @@ main <- function() {
                        breaks = 2004:2015) +
     scale_y_continuous(str_c("Number of ", axis)) +
     theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, " by speed involvement"))
+    ggtitle(str_c("Number of ", title, "\nby speed involvement"))
   
   distract_plot <- data %>% 
     filter(speeding == 'N', drug == 'N') %>% 
@@ -65,7 +65,7 @@ main <- function() {
                        breaks = 2004:2015) +
     scale_y_continuous(str_c("Number of ", axis)) +
     theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, " by distraction involvement"))
+    ggtitle(str_c("Number of ", title, "\nby distraction involvement"))
   
   drug_plot <- data %>% 
     filter(speeding == 'N', distracted == 'N') %>% 
@@ -78,28 +78,34 @@ main <- function() {
                        breaks = 2004:2015) +
     scale_y_continuous(str_c("Number of ", axis)) +
     theme(axis.text.x=element_text(angle=90)) +
-    ggtitle(str_c("Number of ", title, " by drug/alcohol involvement"))
+    ggtitle(str_c("Number of ", title, "\nby drug/alcohol involvement"))
   
   png(str_c(out_folder, "/", file, "-speed-plot.png"))
   speed_plot
   ggsave(filename = str_c(file, "-speed-plot.png"), 
          plot = speed_plot, 
          device = "png",
-         path = out_folder)
+         path = out_folder,
+         scale = 0.5,
+         dpi = 100)
   dev.off()
   png(str_c(out_folder, "/", file, "-distract-plot.png"))
   distract_plot
   ggsave(filename = str_c(file, "-distract-plot.png"), 
          plot = distract_plot, 
          device = "png",
-         path = out_folder)
+         path = out_folder,
+         scale = 0.5,
+         dpi = 100)
   dev.off()
   png(str_c(out_folder, "/", file, "-drug-plot.png"))
   drug_plot
   ggsave(filename = str_c(file, "-drug-plot.png"), 
          plot = drug_plot, 
          device = "png",
-         path = out_folder)
+         path = out_folder,
+         scale = 0.5,
+         dpi = 100)
   dev.off()
   
 }

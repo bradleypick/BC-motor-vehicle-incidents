@@ -72,4 +72,3 @@ clean:
 	rm -f results/data/*.csv
 	rm -f results/img/*.png
 	rm -f data/*.csv
-	rm -f results/motor_vehicle_incident_analysis*
