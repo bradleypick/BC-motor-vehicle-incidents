@@ -28,36 +28,30 @@ data/injury_drug.csv:
 
 
 # merge and write fatality data into data folder
-results/data/fatality.csv: src/merge_data.R data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv
-	Rscript src/merge_data.R data/fatality_distract.csv data/fatality_speed.csv data/fatality_drug.csv ./results/data/fatality.csv
+results/data/distract.csv: src/merge_data.R data/injury_distract.csv data/fatality_distract.csv
+	Rscript src/merge_data.R data/injury_distract.csv data/fatality_distract.csv ./results/data/distract.csv
 
 # merge and write injury data into data folder
-results/data/injury.csv: src/merge_data.R data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv
-	Rscript src/merge_data.R data/injury_distract.csv data/injury_speed.csv data/injury_drug.csv ./results/data/injury.csv
+results/data/speed.csv: src/merge_data.R data/injury_speed.csv data/fatality_speed.csv
+	Rscript src/merge_data.R data/injury_speed.csv data/fatality_speed.csv ./results/data/speed.csv
+
+# merge and write injury data into data folder
+results/data/drug.csv: src/merge_data.R data/injury_drug.csv data/fatality_drug.csv
+	Rscript src/merge_data.R data/injury_drug.csv data/fatality_drug.csv ./results/data/drug.csv
 
 
-# plot the fatality data
-results/img/fatal-speed-plot.png: src/plot_data.R results/data/fatality.csv
-	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+# plot the data grouped by factor involvement
+results/img/distract-plot.png: src/plot_data.R results/data/distract.csv
+	Rscript src/plot_data.R results/data/distract.csv ./results/img/distract-plot.png
 
-results/img/fatal-drug-plot.png: src/plot_data.R results/data/fatality.csv
-	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+results/img/speed-plot.png: src/plot_data.R results/data/speed.csv
+	Rscript src/plot_data.R results/data/speed.csv ./results/img/speed-plot.png
 
-results/img/fatal-distract-plot.png: src/plot_data.R results/data/fatality.csv
-	Rscript src/plot_data.R results/data/fatality.csv ./results/img
+results/img/drug-plot.png: src/plot_data.R results/data/drug.csv
+	Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
 
 
-# plot the injury data
-results/img/injury-speed-plot.png: src/plot_data.R results/data/injury.csv
-	Rscript src/plot_data.R results/data/injury.csv ./results/img
-
-results/img/injury-drug-plot.png: src/plot_data.R results/data/injury.csv
-	Rscript src/plot_data.R results/data/injury.csv ./results/img
-
-results/img/injury-distract-plot.png: src/plot_data.R results/data/injury.csv
-	Rscript src/plot_data.R results/data/injury.csv ./results/img
-
-results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/injury-speed-plot.png results/img/injury-distract-plot.png results/img/injury-drug-plot.png results/img/fatal-speed-plot.png results/img/fatal-distract-plot.png results/img/fatal-drug-plot.png
+results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png
 	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
 
 
