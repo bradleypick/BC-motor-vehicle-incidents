@@ -5,7 +5,7 @@
 # Usage: make all
 #		(from the root directory of project)
 
-all: results/motor_vehicle_incident_analysis.md
+all: doc/motor_vehicle_incident_analysis.md
 
 ## rules to download raw data
 data/fatality_distract.csv:
@@ -61,8 +61,8 @@ results/data/drug_summary.csv: src/summarise_data.R results/data/drug.csv
 	Rscript src/summarise_data.R results/data/drug.csv results/data/drug_summary.csv
 
 
-results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract_summary.csv results/data/speed_summary.csv results/data/drug_summary.csv results/data/speed.csv
-	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
+doc/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract_summary.csv results/data/speed_summary.csv results/data/drug_summary.csv results/data/speed.csv
+	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "doc")'
 
 
 clean:
