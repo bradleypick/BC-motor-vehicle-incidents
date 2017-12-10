@@ -15,26 +15,12 @@ library(knitr)
 library(readr)
 library(dplyr)
 
-## load data sets for summary stats
+## load data sets of summary stats
+speed_out <- read_csv('./results/data/speed_summary.csv')
+drug_out <- read_csv('./results/data/drug_summary.csv')
+distract_out <- read_csv('./results/data/distract_summary.csv')
+## and one more for totals (this one is arbitrary)
 speed <- read_csv('./results/data/speed.csv')
-drug <- read_csv('./results/data/drug.csv')
-distract <- read_csv('./results/data/distract.csv')
-
-## function to summarise the cleaned datasets for presentation
-summary_table <- function(data) {
-  out <- data %>% 
-    group_by(injury_cause, fatality_cause) %>% 
-    summarise(injury = last(injury_count, 
-                          order_by = year) - first(injury_count, 
-                                                   order_by = year),
-                fatality = last(fatality_count, 
-                            order_by = year) - first(fatality_count, 
-                                                     order_by = year)) %>% 
-    filter(injury_cause == 'Y', fatality_cause == 'Y') %>% 
-    ungroup() %>% 
-    select(injury, fatality)
-  return(out)
-}
 ```
 
 ## Introduction
@@ -81,7 +67,6 @@ If we wish to be precise, the number of fatalities resulting from crashes that i
 
 ```{r, echo = FALSE}
 # display speed table
-speed_out <- summary_table(speed)
 speed_out <- speed_out %>%  select("Change in Speeding Involved Injuries" = injury,
                                    "Change in Speeding Involved Fatalities" = fatality)
 kable(speed_out, caption = "2004-2015")
@@ -97,7 +82,6 @@ Like speeding involved incidents, there as been much emphasis placed on keeping 
 
 ```{r, echo = FALSE}
 # display drug table
-drug_out <- summary_table(drug)
 drug_out <- drug_out %>%  select("Change in Drug Involved Injuries" = injury,
                                    "Change in Drug Involved Fatalities" = fatality)
 kable(drug_out, caption = "2004-2015")
@@ -113,7 +97,6 @@ In fact, we are seeing a small trend in the opposite direction. The number of di
 
 ```{r, echo = FALSE}
 # display distraction table
-distract_out <- summary_table(distract)
 distract_out <- distract_out %>%  select("Change in Distraction Involved Injuries" = injury,
                                          "Change in Distraction Involved Fatalities" = fatality)
 kable(distract_out, caption = "2004-2015")

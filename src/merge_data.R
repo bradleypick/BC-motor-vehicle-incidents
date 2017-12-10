@@ -30,10 +30,6 @@ output_file <- args[3]
 # define main function
 main <- function() {
   
-  # extract the filename being read in for column naming
-  # injury_type <- str_extract(injury_file, pattern = "(?<=/)(.*)(?=\\.)")
-  # fatality_type <- str_extract(fatality_file, pattern = "(?<=/)(.*)(?=\\.)")
-  
   # read in 2 datasets from provided location
   injury <- read_csv(injury_file,
                      col_names = c("year", "injury_cause", "injury_count"), 
