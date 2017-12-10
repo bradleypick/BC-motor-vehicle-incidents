@@ -147,5 +147,5 @@ Rscript src/summarise_data.R results/data/drug.csv results/data/drug_summary.csv
 The following command renders the final report whose raw outline lives in the `src/motor_vehicle_incident_analysis.Rmd` file:
 
 ```
-Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
+Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "doc")'
 ```
