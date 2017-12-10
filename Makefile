@@ -51,7 +51,7 @@ results/img/drug-plot.png: src/plot_data.R results/data/drug.csv
 	Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
 
 
-results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png
+results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract.csv results/data/speed.csv results/data/drug.csv
 	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
 
 
