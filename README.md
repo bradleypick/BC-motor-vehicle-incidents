@@ -133,6 +133,16 @@ Rscript src/plot_data.R results/data/speed.csv ./results/img/speed-plot.png
 
 Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
 ```
+The `src/summarise_data.R` file takes a merged data set and returns a table of summary stats for the final report.
+The following commands create summary tables from the merged data sets:
+```
+Rscript src/summarise_data.R results/data/distract.csv results/data/distract_summary.csv
+
+Rscript src/summarise_data.R results/data/speed.csv results/data/speed_summary.csv
+
+Rscript src/summarise_data.R results/data/drug.csv results/data/drug_summary.csv
+```
+
 
 The following command renders the final report whose raw outline lives in the `src/motor_vehicle_incident_analysis.Rmd` file:
 
