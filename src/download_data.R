@@ -7,7 +7,7 @@
 # This script downloads a dataset from the given url
 # and writes to folder provided
 #
-# Usage Rscript download_mv_data.R url folder
+# Usage Rscript download_mv_data.R 'url' folder/
 #
 # Depends on `readr` being installed
 
@@ -21,7 +21,9 @@ output_file <- args[2]
 # define main function
 main <- function() {
   
+  # read in dataset from provided url
   data <- read_csv(url)
+  # write datset to folder provided
   write_csv(data, output_file)
   
 }

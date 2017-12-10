@@ -4,8 +4,8 @@
 #
 # Bradley Pick Dec. 2017
 #
-# This script reads in the merged datasets
-# summarises and plots the data in an instructuve way.
+# This script reads in the merged datasets and
+# summarises/plots the data in an instructive way.
 # 
 # Usage: Rscript plot_data.R input_file.csv output_file
 # 
@@ -32,7 +32,7 @@ main <- function() {
   ## read in the dataset from source provided
   data <- read_csv(input_file)
   
-  ## plot the incidents and the factors involved
+  ## plot the incidents where a fatality occurred
   fatal_plot <- data %>% 
     filter(injury_cause == 'N') %>% 
     ggplot(aes(x=year)) +
@@ -46,6 +46,7 @@ main <- function() {
     theme(axis.text.x=element_text(angle=90)) +
     ggtitle(str_c("Number of Fatalities \nby ", input_type, " involvement"))
   
+  ## plot the data where injuries occurred
   injury_plot <- data %>% 
     filter(fatality_cause == 'N') %>% 
     ggplot(aes(x=year)) +
@@ -59,8 +60,10 @@ main <- function() {
     theme(axis.text.x=element_text(angle=90)) +
     ggtitle(str_c("Number of Injuries \nby ", input_type, " involvement"))
   
+  ## aggregate the plots into a plot grid
   out_plot <- plot_grid(injury_plot, fatal_plot, nrow = 1)
   
+  ## save the plot to name/location provided
   png(output_file)
   ggsave(filename = output_file, 
          plot = out_plot, 
@@ -71,5 +74,6 @@ main <- function() {
   
 }
 
+## call main function
 main()
 

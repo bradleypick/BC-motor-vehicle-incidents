@@ -5,11 +5,11 @@
 # Bradley Pick Dec. 2017
 #
 # This script takes in 2 datasets containing information
-# about motor vehicle incidents and aggregates the data 
-# writing it to a location provided 
+# about motor vehicle incidents incoolving fatalities and injuries
+# and aggregates the data, writing it to a location provided 
 #
-# Usage Rscript merge_data.R /injury_-----.csv /fatality_-----.csv /output.csv
-# Depends on `tidyverse` being installed
+# Usage Rscript merge_data.R /injury.csv /fatality.csv /output.csv
+# Depends on `readr`, `tidyr`, `dplyr`, `stringr` being installed
 
 library(readr)
 library(tidyr)
@@ -31,11 +31,10 @@ output_file <- args[3]
 main <- function() {
   
   # extract the filename being read in for column naming
-  injury_type <- str_extract(injury_file, pattern = "(?<=/)(.*)(?=\\.)")
-  fatality_type <- str_extract(fatality_file, pattern = "(?<=/)(.*)(?=\\.)")
+  # injury_type <- str_extract(injury_file, pattern = "(?<=/)(.*)(?=\\.)")
+  # fatality_type <- str_extract(fatality_file, pattern = "(?<=/)(.*)(?=\\.)")
   
-  # read in 3 datasets from provided location
-  
+  # read in 2 datasets from provided location
   injury <- read_csv(injury_file,
                      col_names = c("year", "injury_cause", "injury_count"), 
                      skip = 1)

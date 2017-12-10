@@ -10,14 +10,17 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
+## depends on knitr, readr, and dplyr being installed
 library(knitr)
 library(readr)
 library(dplyr)
 
+## load data sets for summary stats
 speed <- read_csv('./results/data/speed.csv')
 drug <- read_csv('./results/data/drug.csv')
 distract <- read_csv('./results/data/distract.csv')
 
+## function to summarise the cleaned datasets for presentation
 summary_table <- function(data) {
   out <- data %>% 
     group_by(injury_cause, fatality_cause) %>% 
@@ -43,6 +46,7 @@ On any given week there are frequent news stories discussing the impact that dis
 It may not seem so, but the number of fatalities and injuries on British Columbia's roads decreased between 2004 and 2015:
 
 ```{r, echo = FALSE}
+# table of the total change injuries
 total_in <- speed %>% 
   select(year, injury_cause, injury_count) %>% 
   distinct() %>% 
@@ -50,6 +54,7 @@ total_in <- speed %>%
   summarise(year_total = sum(injury_count)) %>% 
   summarise(total_change_in = last(year_total) - first(year_total))
 
+# table of the total change in fatalities
 total_f <- speed %>% 
   select(year, fatality_cause, fatality_count) %>% 
   distinct() %>% 
@@ -57,6 +62,7 @@ total_f <- speed %>%
   summarise(year_total = sum(fatality_count)) %>% 
   summarise(total_change_f = last(year_total) - first(year_total))
 
+# display tables
 total_out <- bind_cols(total_in, total_f)
 colnames(total_out) <- c("Total Change in Injuries", "Total Change in Fatalities")
 kable(total_out, caption = "2004-2015")
@@ -74,6 +80,7 @@ It is beyond the scope of our analysis to investigate the reasons for the decrea
 If we wish to be precise, the number of fatalities resulting from crashes that involved speeding dropped by 58 between 2004 and 2015 (similarly, injuries involving speeding dropped by 288).
 
 ```{r, echo = FALSE}
+# display speed table
 speed_out <- summary_table(speed)
 speed_out <- speed_out %>%  select("Change in Speeding Involved Injuries" = injury,
                                    "Change in Speeding Involved Fatalities" = fatality)
@@ -89,6 +96,7 @@ To this day the impact that impaired driving has on communities is difficult to 
 Like speeding involved incidents, there as been much emphasis placed on keeping drivers from participating in this type of dangerous behaviour over that last few decades. The exact numbers show that the dropin fatalities and injuries has been of a similar magnitude to speeding involved incidents. The number of fatalities involving drugs dropped by 56 and the number of injuries involving drugs dropped by 186.
 
 ```{r, echo = FALSE}
+# display drug table
 drug_out <- summary_table(drug)
 drug_out <- drug_out %>%  select("Change in Drug Involved Injuries" = injury,
                                    "Change in Drug Involved Fatalities" = fatality)
@@ -104,6 +112,7 @@ More recently than either alcohol/drugs or speed, distracted driving has become 
 In fact, we are seeing a small trend in the opposite direction. The number of distraction involved injuries and fatalities has increased from 2004-2015. This confirms our suspicions that distracted driving was not following the same declining trend as other factors in motor vehicle incidents. The number of fatalities where distraction was a factor increases by 12 between 2004 and 2015. Similarly, the number of injuries where distraction was a factor increased by 5.
 
 ```{r, echo = FALSE}
+# display distraction table
 distract_out <- summary_table(distract)
 distract_out <- distract_out %>%  select("Change in Distraction Involved Injuries" = injury,
                                          "Change in Distraction Involved Fatalities" = fatality)

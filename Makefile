@@ -27,15 +27,15 @@ data/injury_drug.csv:
 	Rscript src/download_data.R "https://catalogue.data.gov.bc.ca/dataset/e87b3585-c195-4ee4-b531-a919262816ce/resource/28076ae1-0db2-48c3-a750-75498fe0357f/download/motor-vehicle-serious-injuries-with-alcohol-and-or-drug-involvement.csv" ./data/injury_drug.csv
 
 
-# merge and write fatality data into data folder
+# merge and write distract data into results/data folder
 results/data/distract.csv: src/merge_data.R data/injury_distract.csv data/fatality_distract.csv
 	Rscript src/merge_data.R data/injury_distract.csv data/fatality_distract.csv ./results/data/distract.csv
 
-# merge and write injury data into data folder
+# merge and write speed data into results/data folder
 results/data/speed.csv: src/merge_data.R data/injury_speed.csv data/fatality_speed.csv
 	Rscript src/merge_data.R data/injury_speed.csv data/fatality_speed.csv ./results/data/speed.csv
 
-# merge and write injury data into data folder
+# merge and write drug data into results/data folder
 results/data/drug.csv: src/merge_data.R data/injury_drug.csv data/fatality_drug.csv
 	Rscript src/merge_data.R data/injury_drug.csv data/fatality_drug.csv ./results/data/drug.csv
 
@@ -50,8 +50,18 @@ results/img/speed-plot.png: src/plot_data.R results/data/speed.csv
 results/img/drug-plot.png: src/plot_data.R results/data/drug.csv
 	Rscript src/plot_data.R results/data/drug.csv ./results/img/drug-plot.png
 
+# summarise data by factor involvement
+results/data/distract_summary.csv: src/summarise_data.R results/data/distract.csv
+	Rscript src/summarise_data.R results/data/distract.csv results/data/distract_summary.csv
 
-results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract.csv results/data/speed.csv results/data/drug.csv
+results/data/speed_summary.csv: src/summarise_data.R results/data/speed.csv
+	Rscript src/summarise_data.R results/data/speed.csv results/data/speed_summary.csv
+
+results/data/drug_summary.csv: src/summarise_data.R results/data/drug.csv
+	Rscript src/summarise_data.R results/data/drug.csv results/data/drug_summary.csv
+
+
+results/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract_summary.csv results/data/speed_summary.csv results/data/drug_summary.csv results/data/speed.csv
 	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "results")'
 
 
