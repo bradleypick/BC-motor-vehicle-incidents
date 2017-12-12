@@ -1,21 +1,34 @@
 # BC Motor Vehicle Incident Analysis
 
-### Usage
+### Reproduction using Docker
 
-From the root folder of project directory:
+Asssociated with this project is a docker image that contains all software/packages  
+necessary to reproduce the results. If you have docker installed and have this
+repository cloned, you can run the following command to run the analysis from
+beginning to end (you will need only change the local path
+  `<local-path-to-project-repository>`
+to point to the location of the project repo on your local machine):
+
 ```
-make all
+docker run --rm -v <local-path-to-project-repository>/BC-motor-vehicle-incidents:/home/BC-motor-vehicle-incidents bradleypick/bc-motor-vehicle-incidents make -C '/home/BC-motor-vehicle-incidents'
 ```
-If you wish to clean up after yourself:
+
+Similarly, you can use the docker image to remove the results with the following
+command:
+
 ```
-make clean
+docker run --rm -v <local-path-to-project-repository>/BC-motor-vehicle-incidents:/home/BC-motor-vehicle-incidents bradleypick/bc-motor-vehicle-incidents make -C '/home/BC-motor-vehicle-incidents' clean
 ```
+
+**Note**: other options for running the analysis are listed at the end of the
+README.
+
+### Makefile dependency graph
 
 The `Makefile` dependency graph looks like this:
 
 ![](./Makefile.png)
 
-If for some reason you need the explicit terminal commands, they are listed at the end of the README.
 
 ### Dependencies
 
@@ -82,6 +95,19 @@ The results confirm both of our hypotheses. Both the total number of injuries an
 Furthermore, we found that both speeding and drugs/alcohol have become less frequently occuring factors in these incidents (as measured by sheer numbers).
 
 Finally, we found that the number of injuries and fatalities where distraction was involved actually *increased* between 2004 and 2014.
+
+#### Using Make
+
+If you have make installed and all dependencies on your local machine, you can
+simply execute the following command from root of project:
+
+```
+make all
+```
+To clean up:
+```
+make clean
+```
 
 
 #### Explicit Terminal Commands
