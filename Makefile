@@ -62,7 +62,7 @@ results/data/drug_summary.csv: src/summarise_data.R results/data/drug.csv
 
 
 doc/motor_vehicle_incident_analysis.md: src/motor_vehicle_incident_analysis.Rmd results/img/distract-plot.png results/img/speed-plot.png results/img/drug-plot.png results/data/distract_summary.csv results/data/speed_summary.csv results/data/drug_summary.csv results/data/speed.csv
-	Rscript -e 'ezknitr::ezknit("src/motor_vehicle_incident_analysis.Rmd", out_dir = "doc")'
+	Rscript -e "ezknitr::ezknit('src/motor_vehicle_incident_analysis.Rmd', out_dir = 'doc')"
 
 
 clean:
