@@ -23,6 +23,8 @@ docker run --rm -v <local-path-to-project-repository>/BC-motor-vehicle-incidents
 **Note**: other options for running the analysis are listed at the end of the
 README.
 
+**Note**: The docker image being used in the above command is located [here](https://hub.docker.com/r/bradleypick/bc-motor-vehicle-incidents/).
+
 ### Makefile dependency graph
 
 The `Makefile` dependency graph looks like this:
