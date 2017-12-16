@@ -3,8 +3,8 @@
 ### Reproduction using Docker
 
 Asssociated with this project is a docker image that contains all software/packages  
-necessary to reproduce the results. If you have docker installed and have this
-repository cloned, you can run the following command to run the analysis from
+necessary to reproduce the results. If you have docker installed and have `git clone`d
+this repository, you can run the following command to run the analysis from
 beginning to end (you will need only change the local path
   `<local-path-to-project-repository>`
 to point to the location of the project repo on your local machine):
@@ -40,6 +40,7 @@ Rstudio version 1.1.383
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 14.04.3 LTS
 GNU Make 3.81
+Docker version 17.05.0-ce
 ```
 
 Every effort has been made to use `packrat` to manage package dependencies. As far
