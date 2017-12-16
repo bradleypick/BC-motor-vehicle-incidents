@@ -1,5 +1,9 @@
 # Docker file for BC-motor-vehicle-incidents
 # Bradley Pick, Dec. 2017
+#
+# this dockerfile is used in the automated build of the docker image
+# that can be used for easy replication of the BC-motor-vehicle-incidents p
+# project
 
 # Use rocker/tidyverse as a base image
 FROM rocker/tidyverse
